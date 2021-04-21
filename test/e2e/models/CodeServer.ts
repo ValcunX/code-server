@@ -15,7 +15,13 @@ export class CodeServer {
    */
   async navigate() {
     await this.page.goto(CODE_SERVER_ADDRESS, { waitUntil: "networkidle" })
+  }
 
+  /**
+   * Checks if the editor is visible
+   * and reloads until it is
+   */
+  async reloadUntilEditorIsVisible() {
     const editorIsVisible = await this.isEditorVisible()
     let reloadCount = 0
 
@@ -56,7 +62,7 @@ export class CodeServer {
     // then we can focus it by hitting the keyboard shortcut
     const isTerminalVisible = await this.page.isVisible("#terminal")
     if (isTerminalVisible) {
-      await this.page.keyboard.press(`Meta+Backquote`)
+      await this.page.keyboard.press(`Control+Backquote`)
       return
     }
     // Open using the manu
@@ -70,5 +76,16 @@ export class CodeServer {
     // Click text=Terminal
     await this.page.hover("text=Terminal")
     await this.page.click("text=Terminal")
+  }
+
+  /**
+   * Navigates to CODE_SERVER_ADDRESS
+   * and reloads until the editor is visible
+   *
+   * Helpful for running before tests
+   */
+  async setup() {
+    await this.navigate()
+    await this.reloadUntilEditorIsVisible()
   }
 }

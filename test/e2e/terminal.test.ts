@@ -25,7 +25,7 @@ test.describe("Integrated Terminal", () => {
   }
   test.beforeEach(async ({ page }) => {
     codeServer = new CodeServer(page)
-    await codeServer.navigate()
+    await codeServer.setup()
   })
 
   test("should echo a string to a file", options, async ({ page }) => {

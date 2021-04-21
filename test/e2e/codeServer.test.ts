@@ -20,7 +20,7 @@ test.describe("CodeServer", () => {
 
   test.beforeEach(async ({ page }) => {
     codeServer = new CodeServer(page)
-    await codeServer.navigate()
+    await codeServer.setup()
   })
 
   test("should navigate to the CODE_SERVER_ADDRESS", options, async ({ page }) => {
