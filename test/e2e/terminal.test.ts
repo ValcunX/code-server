@@ -39,7 +39,7 @@ test.describe("Integrated Terminal", () => {
     await codeServer.focusTerminal()
 
     // give the terminal a second to load
-    await page.waitForTimeout(3000)
+    await page.waitForLoadState("load")
     await page.keyboard.type(`echo '${testString}' > ${tmpFile}`)
     // Wait for the typing to finish before hitting enter
     await page.waitForTimeout(500)
