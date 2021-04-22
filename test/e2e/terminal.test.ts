@@ -38,13 +38,15 @@ test.describe("Integrated Terminal", () => {
     // Open terminal and type in value
     await codeServer.focusTerminal()
 
-    // give the terminal a second to load
     await page.waitForLoadState("load")
     await page.keyboard.type(`echo '${testString}' > ${tmpFile}`)
     // Wait for the typing to finish before hitting enter
-    await page.waitForTimeout(500)
+    await page.waitForTimeout(1000)
     await page.keyboard.press("Enter")
+    // Wait for enter to register and
+    // and file to be created
     await page.waitForTimeout(2000)
+    // await page.waitForLoadState("networkidle")
 
     // .access checks if the file exists without opening it
     // it doesn't return anything hence why we expect it to
