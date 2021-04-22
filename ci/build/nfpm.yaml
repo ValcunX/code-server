@@ -1,7 +1,7 @@
 name: "code-server"
 arch: "${ARCH}"
 platform: "linux"
-version: "v${VERSION}"
+version: "${VERSION}"
 section: "devel"
 priority: "optional"
 maintainer: "Anmol Sethi <hi@nhooyr.io>"
