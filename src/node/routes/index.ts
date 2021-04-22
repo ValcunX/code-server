@@ -20,6 +20,7 @@ import * as apps from "./apps"
 import * as domainProxy from "./domainProxy"
 import * as health from "./health"
 import * as login from "./login"
+import * as logout from "./logout"
 import * as pathProxy from "./pathProxy"
 // static is a reserved keyword.
 import * as _static from "./static"
@@ -141,6 +142,7 @@ export const register = async (
       redirect(req, res, "/", {})
     })
   }
+  app.use("/logout", logout.router)
 
   app.use("/static", _static.router)
   app.use("/update", update.router)

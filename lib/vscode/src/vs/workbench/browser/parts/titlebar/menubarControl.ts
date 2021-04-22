@@ -718,7 +718,7 @@ export class CustomMenubarControl extends MenubarControl {
 		async (event?: MouseEvent) => {
 			const COOKIE_KEY = Cookie.Key;
 			const loginCookie = getCookieValue(COOKIE_KEY);
-
+			
 			this.logService.info('Logging out of code-server');
 
 			if(loginCookie) {
@@ -727,7 +727,8 @@ export class CustomMenubarControl extends MenubarControl {
 				if (document && document.cookie) {
 					// We delete the cookie by setting the expiration to a date/time in the past
 					document.cookie = COOKIE_KEY +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-					window.location.href = '/login';
+					
+					window.location.replace('/logout');
 				} else {
 					this.logService.warn('Could not delete cookie because document and/or document.cookie is undefined');
 				}
