@@ -63,6 +63,11 @@ export class CodeServer {
     const isTerminalVisible = await this.page.isVisible("#terminal")
     if (isTerminalVisible) {
       await this.page.keyboard.press(`Control+Backquote`)
+      // Wait for terminal to receive focus
+      await this.page.waitForSelector("div.terminal.xterm.focus")
+      // Sometimes the terminal reloads
+      // which is why we wait for it twice
+      await this.page.waitForSelector("div.terminal.xterm.focus")
       return
     }
     // Open using the manu
@@ -76,6 +81,14 @@ export class CodeServer {
     // Click text=Terminal
     await this.page.hover("text=Terminal")
     await this.page.click("text=Terminal")
+
+    // Wait for terminal to receive focus
+    // Sometimes the terminal reloads once or twice
+    // which is why we wati for it to have the focus class
+    await this.page.waitForSelector("div.terminal.xterm.focus")
+    // Sometimes the terminal reloads
+    // which is why we wait for it twice
+    await this.page.waitForSelector("div.terminal.xterm.focus")
   }
 
   /**
